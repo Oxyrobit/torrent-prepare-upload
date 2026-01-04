@@ -28,7 +28,7 @@ Before using this script, you need to have the following tools installed on your
   sudo apt-get install mediainfo
   
   # macOS (Homebrew)
-  brew install media-info
+  brew install mediainfo
   
   # Fedora/RHEL
   sudo dnf install mediainfo
