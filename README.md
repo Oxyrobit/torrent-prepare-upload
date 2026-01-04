@@ -4,7 +4,7 @@ A Bash script to automate the preparation of torrent files and MediaInfo for upl
 
 ## Overview
 
-This script simplifies the process of creating torrent files and generating MediaInfo for your media files. It's designed for private trackers that use the announce URL format: `https://yourtracker/announce/passkey`
+This script simplifies the process of creating torrent files and generating MediaInfo for your media files. It's designed for private trackers that use announce URLs with a passkey (e.g., `https://yourtracker/announce/your-passkey`).
 
 ## How It Works
 
@@ -60,8 +60,8 @@ chmod +x prepare-upload.sh
 
 Edit the `prepare-upload.sh` file and update the following variables:
 
-- **TRACKER_URL**: Replace `https://YOUR_TRACKER.cc/announce` with your tracker's base URL
-- **PASSKEY**: Add your personal passkey provided by your tracker
+- **TRACKER_URL**: Your tracker's announce URL (should end with `/announce`)
+- **PASSKEY**: Your personal passkey provided by your tracker
 
 Example:
 ```bash
@@ -69,7 +69,7 @@ TRACKER_URL="https://mytracker.net/announce"
 PASSKEY="your_personal_passkey_here"
 ```
 
-The script will automatically construct the full announce URL in the format: `https://yourtracker/announce/passkey`
+The script will automatically construct the full announce URL by combining these: `TRACKER_URL/PASSKEY` (e.g., `https://mytracker.net/announce/your_personal_passkey_here`).
 
 ## Usage
 
@@ -107,7 +107,7 @@ The script will generate two files:
 ## Important Notes
 
 - **NFO files are prohibited**: The script will exit with an error if any `.nfo` files are detected in the upload directory
-- **Tracker URL format**: This script is designed for trackers using the announce URL format `https://yourtracker/announce/passkey`
+- **Tracker URL configuration**: Configure your TRACKER_URL (ending with `/announce`) and PASSKEY separately in the script. They will be combined as `TRACKER_URL/PASSKEY`
 - **Passkey security**: Never share your passkey or commit it to public repositories
 
 ## Troubleshooting
