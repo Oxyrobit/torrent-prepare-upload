@@ -1,15 +1,15 @@
 #!/bin/bash
 set -Eeuo pipefail
-# Vérifications de base
+# Basic checks
 if [ $# -ne 1 ]; then
-    echo "Usage: $0 <dossier_source>"
+    echo "Usage: $0 <source_directory>"
     exit 1
 fi
 
 SRC="$(realpath "$1")"
 
 if [ ! -d "$SRC" ]; then
-    echo "Le chemin fourni n'est pas un dossier."
+    echo "The provided path is not a directory."
     exit 1
 fi
 
@@ -19,13 +19,13 @@ NEW_BASENAME="$(echo "$BASENAME" | tr ' ' '.')"
 DST="$PARENT/$NEW_BASENAME"
 
 if [ -e "$DST" ]; then
-    echo "Le dossier destination existe déjà: $DST"
+    echo "The destination directory already exists: $DST"
     exit 1
 fi
 
 #mkdir "$DST"
-echo "Prévisualisation des opérations à effectuer :"
-# Création des dossiers
+echo "Preview of operations to be performed:"
+# Directory creation
 find "$SRC" -type d | while read -r dir; do
     rel="${dir#$SRC/}"
     [ "$dir" = "$SRC" ] && continue
@@ -34,9 +34,9 @@ find "$SRC" -type d | while read -r dir; do
 done
 
 
-read -p "Ce script va créer un nouveau dossier avec des noms de fichiers et dossiers sans espaces. Voulez-vous continuer ? (Y/N) " choice
+read -p "This script will create a new directory with file and directory names without spaces. Do you want to continue? (Y/N) " choice
 if [[ "$choice" != "Y" && "$choice" != "y" ]]; then
-    echo "Opération annulée."
+    echo "Operation cancelled."
     exit 1
 fi
 
@@ -49,7 +49,7 @@ find "$SRC" -type d | while read -r dir; do
     mkdir "$DST/$new_rel"
 done
 
-# Création des hardlinks
+# Hardlink creation
 find "$SRC" -type f | while read -r file; do
     rel="${file#$SRC/}"
     new_rel="$(echo "$rel" | tr ' ' '.')"
