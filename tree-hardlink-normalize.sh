@@ -23,7 +23,6 @@ if [ -e "$DST" ]; then
     exit 1
 fi
 
-#mkdir "$DST"
 echo "Preview of operations to be performed:"
 # Directory creation
 find "$SRC" -type d | while read -r dir; do
@@ -32,7 +31,6 @@ find "$SRC" -type d | while read -r dir; do
     new_rel="$(echo "$rel" | tr ' ' '.')"
     echo "$DST/$new_rel"
 done
-
 
 read -p "This script will create a new directory with file and directory names without spaces. Do you want to continue? (Y/N) " choice
 if [[ "$choice" != "Y" && "$choice" != "y" ]]; then
